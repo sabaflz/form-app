@@ -14,32 +14,15 @@ function App() {
         // const inputName = event.target.name;
         const {name, value} = event.target;
 
-        setContact(prevValue =>{
-            if (name === "fName"){
-                return({
-                    fName: value,
-                    lName: prevValue.lName,
-                    email: prevValue.email
-                });
-            } else if (name === "lName"){
-                return({
-                    fName: prevValue.fName,
-                    lName: value,
-                    email: prevValue.email
-                });
-            } else if (name === "email"){
-                return({
-                    fName: prevValue.fName,
-                    lName: prevValue.lName,
-                    email: value
-                });
-            }
-        })
+        setContact(prevValue =>({
+            ...prevValue,
+            [name]: value
+        }));
     }
 
     // changing the color of the submit button to balck on mouse over
 
-    const [isMousedOver, setMousedOver] = useState("");
+    const [isMousedOver, setMousedOver] = useState(false);
 
     function changeColorToBlack(){
         setMousedOver(true);
@@ -84,3 +67,28 @@ function App() {
 }
 
 export default App;
+
+
+
+// long version just as a reminder
+// setContact(prevValue =>{
+//     if (name === "fName"){
+//         return({
+//             fName: value,
+//             lName: prevValue.lName,
+//             email: prevValue.email
+//         });
+//     } else if (name === "lName"){
+//         return({
+//             fName: prevValue.fName,
+//             lName: value,
+//             email: prevValue.email
+//         });
+//     } else if (name === "email"){
+//         return({
+//             fName: prevValue.fName,
+//             lName: prevValue.lName,
+//             email: value
+//         });
+//     }
+// })

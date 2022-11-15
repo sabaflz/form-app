@@ -2,17 +2,30 @@ import React , {useState} from "react";
 
 function App() {
 
-    const [fName, setFName] = useState("");
-    const [lName, setLName] = useState("");
+    const [fullName, setFullName] = useState(
+        {
+            fName: "",
+            lName: ""
+        }
+    );
 
-    function updateFName(event){
-        const newFName = event.target.value;
-        setFName(newFName);
-    }
+    function updateFullName(event){
+        const newValue = event.target.value;
+        const inputName = event.target.name;
 
-    function updateLName(event){
-        const newLName = event.target.value;
-        setLName(newLName);
+        setFullName(preValue =>{
+            if (inputName === "fName"){
+                return({
+                    fName: newValue,
+                    lName: preValue.lName
+                });
+            } else if (inputName === "lName"){
+                return({
+                    fName: preValue.fName,
+                    lName: newValue
+                });
+            }
+        })
     }
 
     // changing the color of the submit button to balck on mouse over
@@ -31,23 +44,24 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Hello {fName} {lName}</h1>
+      <h1>Hello {fullName.fName} {fullName.lName}</h1>
       <form>
         <input 
             name="fName"
-            onChange={updateFName}
+            onChange={updateFullName}
             placeholder="First Name"
-            value={fName}
+            value={fullName.fName}
         />
         <input 
             name="lName"
-            onChange={updateLName}
+            onChange={updateFullName}
             placeholder="Last Name"
-            value={lName}
+            value={fullName.lName}
         />
         <button 
             onMouseOver={changeColorToBlack}
-            onMouseOut={changeColorToWhite}>Submit</button>
+            onMouseOut={changeColorToWhite}
+        >Submit</button>
       </form>
     </div>
   );

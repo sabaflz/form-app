@@ -10,19 +10,20 @@ function App() {
     );
 
     function updateFullName(event){
-        const newValue = event.target.value;
-        const inputName = event.target.name;
+        // const newValue = event.target.value;
+        // const inputName = event.target.name;
+        const {name, value} = event.target;
 
         setFullName(preValue =>{
-            if (inputName === "fName"){
+            if (name === "fName"){
                 return({
-                    fName: newValue,
+                    fName: value,
                     lName: preValue.lName
                 });
-            } else if (inputName === "lName"){
+            } else if (name === "lName"){
                 return({
                     fName: preValue.fName,
-                    lName: newValue
+                    lName: value
                 });
             }
         })
@@ -30,17 +31,17 @@ function App() {
 
     // changing the color of the submit button to balck on mouse over
 
-    const [color, setColor] = useState("");
+    const [isMousedOver, setMousedOver] = useState("");
 
     function changeColorToBlack(){
-        setColor("black");
-        document.querySelector("button").style.backgroundColor = color;
+        setMousedOver(true);
     }
 
     function changeColorToWhite(){
-        setColor("white");
-        document.querySelector("button").style.backgroundColor = color;
+        setMousedOver(false);
     }
+
+    document.querySelector("button").style.backgroundColor = isMousedOver ? "black" : "white";
 
   return (
     <div className="container">
